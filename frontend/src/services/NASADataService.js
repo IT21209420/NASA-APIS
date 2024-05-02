@@ -14,6 +14,32 @@ const NASADataService = {
       return [];
     }
   },
+
+  getPictureOfTheDay: async () => {
+    try {
+      const response = await axios.get(
+        `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
+      );
+      console.log("Picture of the day response:", response);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching picture of the day:", error);
+      return {};
+    }
+  },
+  
+  getEarthImagery: async (lat, lon, date) => {
+    try {
+      const response = await axios.get(
+        `https://api.nasa.gov/planetary/earth/assets/?lon=${lon}&lat=${lat}&date=${date}&dim=0.15&api_key=${API_KEY}`
+      );
+      console.log("Earth imagery response:", response);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching earth imagery:", error);
+      return {};
+    }
+  },
 };
 
 export default NASADataService;

@@ -4,13 +4,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <div
-        className="
-      bg-red-500
-      "
-      >
-        {children}
-      </div>
+      <div>{children}</div>
     </>
   );
 };
