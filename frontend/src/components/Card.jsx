@@ -15,7 +15,9 @@ const Card = ({ photo }) => {
     setModalIsOpen(false);
   };
   return (
-    <div className="border rounded-md p-2 h-52 w-64 border-gray-700  backdrop-filter backdrop-blur-sm">
+    <div className=" rounded-md p-2 h-52 w-64 shadow-lg 
+    bg-white bg-opacity-50 hover:bg-opacity-70 transition duration-300 ease-in-out
+    ">
       <img
         src={photo.img_src}
         alt={photo.camera.full_name}
@@ -25,14 +27,14 @@ const Card = ({ photo }) => {
       <div className="mt-2">
         <h2
           className="text-sm font-semibold
-        text-gray-100
+        text-black
         "
         >
           {photo.rover.name}
         </h2>
         <p
           className="text-xs
-        text-gray-300
+        text-black
         "
         >
           {photo.earth_date}
