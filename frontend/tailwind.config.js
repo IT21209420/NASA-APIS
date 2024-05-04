@@ -3,16 +3,17 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        orbitron: ["Orbitron", "sans-serif"],
-      },
+      // fontFamily: {
+      //   mono: ["mono", "sans-serif"],
+      // },
       colors: {
-        dominant: "#cde2e8",
-        secondary: "#30a1e9",
+        dominant: "#fc3c24",
+        secondary: "#0a3c91",
         accent: "#e52d81",
+        pink: "#ba1e68",
       },
       backgroundImage: {
-        "custom-bg": "url('/src/assets/background.jpg')",
+        "custom-bg": "url('/src/assets/9742330.jpg')",
       },
     },
   },
