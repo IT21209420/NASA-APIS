@@ -14,21 +14,23 @@ const PictureOfTheDay = () => {
 
   return (
     <div
-      className="mx-auto px-4 py-8
-    bg-dominant
-    "
+      className="px-4 py-2
+      bg-dominant
+      h-screen"
     >
-      <div className="flex flex-col items-center">
-        <h1 className="text-2xl font-bold text-white">Picture of the Day</h1>
+      <div className="bg-white rounded-lg shadow-lg p-6 mt-6 flex flex-col items-center bg-opacity-60">
+        <h1 className="text-2xl font-bold text-black mb-4">
+          Picture of the Day
+        </h1>
         <img
           src={pictureOfTheDay.url}
           alt={pictureOfTheDay.title}
-          className="w-full md:w-1/2 rounded-lg mt-4"
+          className="w-64  rounded-lg mb-4"
         />
-        <h2 className="text-xl font-bold text-white mt-4">
+        <h2 className="text-xl font-bold text-black mb-2">
           {pictureOfTheDay.title}
         </h2>
-        <p className="text-white mt-4">{pictureOfTheDay.explanation}</p>
+        <p className="text-black">{pictureOfTheDay.explanation}</p>
       </div>
     </div>
   );
