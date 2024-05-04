@@ -5,12 +5,25 @@ const NASADataService = {
   getRoverPhotos: async (page = 1) => {
     try {
       const response = await axios.get(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=${page}&api_key=${API_KEY}`
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&page=${page}&api_key=${API_KEY}`
       );
       console.log("Rover photos response:", response);
       return response.data.photos;
     } catch (error) {
       console.error("Error fetching rover photos:", error);
+      return [];
+    }
+  },
+
+  getRoverTypes: async () => {
+    try {
+      const response = await axios.get(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers?api_key=${API_KEY}`
+      );
+      console.log("Rover types response:", response);
+      return response.data.rovers;
+    } catch (error) {
+      console.error("Error fetching rover types:", error);
       return [];
     }
   },
@@ -27,7 +40,7 @@ const NASADataService = {
       return {};
     }
   },
-  
+
   getEarthImagery: async (lat, lon, date) => {
     try {
       const response = await axios.get(
