@@ -1,9 +1,10 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 const Home = () => {
+ 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <Link to="/rovers" className="border rounded-md p-4 text-center">
         <h2 className="font-bold">Rovers</h2>
         <p>View rover photos</p>
@@ -18,7 +19,7 @@ const Home = () => {
       <Link to="/earth_imagery" className="border rounded-md p-4 text-center">
         <h2 className="font-bold">Earth Imagery</h2>
         <p>View earth imagery</p>
-      </Link>
+      </Link>     
     </div>
   );
 };
