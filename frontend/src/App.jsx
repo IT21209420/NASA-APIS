@@ -10,6 +10,8 @@ import { ToastContextProvider } from "./context/ToastContext";
 import Rovers from "./pages/rovers/Rovers";
 import PictureOfTheDay from "./pages/pictureOfTheDay/PictureOfTheDay";
 import EarthImaginery from "./pages/earthImaginery/EarthImaginery";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
               <Route path="/rovers" element={<Rovers />} />
               <Route path="/picture_of_the_day" element={<PictureOfTheDay />} />
               <Route path="/earth_imagery" element={<EarthImaginery />} />
-              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
             </Routes>
           </Layout>
         </AuthContextProvider>
