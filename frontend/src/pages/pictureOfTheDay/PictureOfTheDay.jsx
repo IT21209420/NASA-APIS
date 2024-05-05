@@ -41,9 +41,6 @@ const PictureOfTheDay = () => {
   return (
     <BackgroundVideo url={bgVideo}>
       <div className="px-4 py-2 flex flex-col items-center">
-        {/* <h1 className="text-2xl font-bold text-white mb-4">
-          Picture of the Day
-        </h1> */}
         <div className="rounded-lg shadow-lg p-10  flex flex-col items-center bg-opacity-60 backdrop-filter backdrop-blur-lg border border-gray-600">
           <img
             src={pictureOfTheDay.url}
