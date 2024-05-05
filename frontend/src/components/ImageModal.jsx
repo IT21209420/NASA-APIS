@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-const ImageModal = ({ photo, modalIsOpen, closeModal }) => {
+const ImageModal = ({ src, modalIsOpen, closeModal, full_name }) => {
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -24,8 +24,8 @@ const ImageModal = ({ photo, modalIsOpen, closeModal }) => {
       <TransformWrapper>
         <TransformComponent>
           <img
-            src={photo.img_src}
-            alt={photo.camera.full_name}
+            src={src}
+            alt={full_name ? full_name : "Image"}
             style={{
               maxWidth: "90vw",
               maxHeight: "90vh",
