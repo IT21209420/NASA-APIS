@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > should render Card component 1`] = `
+<div>
+  <div
+    class=" rounded-md p-2 h-48 w-64 shadow-lg 
+    bg-opacity-60 backdrop-filter backdrop-blur-lg border border-gray-600
+    "
+  >
+    <img
+      alt="Mast Camera"
+      class="h-32 w-full object-cover cursor-pointer"
+      src="https://mars.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044631200305217E01_DXXX.jpg"
+    />
+    <div
+      class="mt-2"
+    >
+      <h2
+        class="text-sm font-semibold
+        text-white
+        "
+      >
+        Curiosity
+      </h2>
+      <p
+        class="text-xs
+        text-white
+        "
+      >
+        2021-08-01
+      </p>
+    </div>
+  </div>
+</div>
+`;
