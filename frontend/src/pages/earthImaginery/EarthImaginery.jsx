@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NASADataService from "../../services/NASADataService";
 import Loading from "../../components/Loading";
-import Modal from "react-modal";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 import NoContentFound from "../../components/NoContentFound";
 import ImageModal from "../../components/ImageModal";
+import bgVideo from "../../assets/video-earthImaginery.mp4";
+import BackgroundVideo from "../../components/BackgroundVideo";
 
 const EarthImaginery = () => {
   const [earthImagery, setEarthImagery] = useState({});
@@ -64,65 +65,72 @@ const EarthImaginery = () => {
   };
 
   return (
-    <div
-      className="mx-auto px-4 py-5 bg-dominant
+    <BackgroundVideo url={bgVideo}>
+      <div
+        className="mx-auto px-4 py-5
  
     "
-      style={{ height: "calc(100vh - 4rem)" }}
-    >
-      <div className="flex flex-col items-center">
-        <h1 className="text-2xl font-bold text-white ">Earth Imagery</h1>
-        <div className="flex  items-center gap-5">
-          <input
-            type="date"
-            value={date}
-            onChange={handleDateChange}
-            className="border-2 border-white rounded-md px-2 mt-2 text-black bg-white bg-opacity-50"
-          />
-          <input
-            type="number"
-            value={latitude}
-            onChange={handleLatitudeChange}
-            placeholder="Latitude"
-            className="border-2 border-white rounded-md px-2 mt-2 text-black bg-white bg-opacity-50"
-          />
-          <input
-            type="number"
-            value={longitude}
-            onChange={handleLongitudeChange}
-            placeholder="Longitude"
-            className="border-2 border-white rounded-md px-2 mt-2 text-black bg-white bg-opacity-50"
-          />
+        style={{ height: "calc(100vh - 4rem)" }}
+      >
+        <div className="flex flex-col items-center">
+          <h1 className="text-2xl font-bold text-white ">Earth Imagery</h1>
+          <div className="flex  items-center gap-5">
+            <input
+              type="date"
+              value={date}
+              onChange={handleDateChange}
+              className="rounded-md px-2 mt-2 text-gray-200 bg-transparent  bg-opacity-60 backdrop-filter backdrop-blur-lg border border-gray-600"
+            />
+            <input
+              type="number"
+              value={latitude}
+              onChange={handleLatitudeChange}
+              placeholder="Latitude"
+              className="rounded-md px-2 mt-2 text-gray-200 bg-transparent  bg-opacity-60 backdrop-filter backdrop-blur-lg border border-gray-600"
+            />
+            <input
+              type="number"
+              value={longitude}
+              onChange={handleLongitudeChange}
+              placeholder="Longitude"
+              className="rounded-md px-2 mt-2 text-gray-200 bg-transparent  bg-opacity-60 backdrop-filter backdrop-blur-lg border border-gray-600"
+            />
+          </div>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <>
+              {earthImagery.url ? (
+                <div
+                  className={`border border-gray-200 p-5 mt-4 ${
+                    isImageLoading ? "hidden" : ""
+                  }`}
+                >
+                  <img
+                    src={earthImagery.url}
+                    alt="Earth Imagery"
+                    className={`w-[65vh]   `}
+                    onLoad={handleImageLoad}
+                    onClick={openModal}
+                  />
+                  {isImageLoading && <Loading />}
+                </div>
+              ) : (
+                <p className="text-white">
+                  <NoContentFound content="No Earth Imagery found for the selected date and location." />
+                </p>
+              )}
+            </>
+          )}
         </div>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <>
-            {earthImagery.url ? (
-              <>
-                <img
-                  src={earthImagery.url}
-                  alt="Earth Imagery"
-                  className={`w-[65vh]  mt-4 ${isImageLoading ? "hidden" : ""}`}
-                  onLoad={handleImageLoad}
-                  onClick={openModal}
-                />
-                {isImageLoading && <Loading />}
-              </>
-            ) : (
-              <p className="text-white">
-                <NoContentFound content="No Earth Imagery found for the selected date and location." />
-              </p>
-            )}
-          </>
-        )}
+        <ImageModal
+          src={earthImagery.url}
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+          full_name="Earth Imagery"
+        />
       </div>
-      <ImageModal
-        earthImagery={earthImagery}
-        modalIsOpen={modalIsOpen}
-        closeModal={closeModal}
-      />
-    </div>
+    </BackgroundVideo>
   );
 };
 
