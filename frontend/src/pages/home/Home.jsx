@@ -8,8 +8,10 @@ import BackgroundVideo from "../../components/BackgroundVideo";
 import bgVideo from "../../assets/video-home.mp4";
 
 const Home = () => {
+  // State for loading
   const [loading, setLoading] = useState(true);
 
+  // Preload images
   useEffect(() => {
     const img1 = new Image();
     const img2 = new Image();
@@ -24,10 +26,12 @@ const Home = () => {
       .catch((err) => console.error(err));
   }, []);
 
+  // Show loading spinner
   if (loading) {
     return <Loading />;
   }
 
+  // Render the home page
   return (
     <BackgroundVideo url={bgVideo}>
       <div className="px-4 py-2 text-white mt-10">
