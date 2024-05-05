@@ -1,8 +1,14 @@
 import axios from "axios";
 
 const API_KEY = "oEoICSGSIoxJa7t8Yc58SvLz0O4BApQhDipfTmDf";
+/**
+ * Service for fetching data from NASA API.
+ *
+ * @namespace NASADataService
+ */
 const NASADataService = {
-  getRoverPhotos: async (page = 1, roverName, sol) => {
+  //fetching rover photos
+  getRoverPhotos: async (roverName, sol) => {
     try {
       const response = await axios.get(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?sol=${sol}&api_key=${API_KEY}`
@@ -15,6 +21,7 @@ const NASADataService = {
     }
   },
 
+  //fetching picture of the day
   getPictureOfTheDay: async () => {
     try {
       const response = await axios.get(
@@ -28,6 +35,7 @@ const NASADataService = {
     }
   },
 
+  //fetching earth imagery
   getEarthImagery: async (lat, lon, date) => {
     try {
       const response = await fetch(
