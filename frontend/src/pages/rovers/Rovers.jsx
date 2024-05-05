@@ -5,6 +5,8 @@ import prevButtonImage from "../../assets/navi_rocket.png";
 import nextButtonImage from "../../assets/navi_rocket.png";
 import NoContentFound from "../../components/NoContentFound.jsx";
 import Loading from "../../components/Loading.jsx";
+import BackgroundVideo from "../../components/BackgroundVideo.jsx";
+import bgVideo from "../../assets/video-rover.mp4";
 
 const Rovers = () => {
   const [roverPhotos, setRoverPhotos] = useState([]);
@@ -45,24 +47,15 @@ const Rovers = () => {
   };
 
   return (
-    <div
-      className="px-4 py-2
-    bg-dominant
-  
-    "
-      style={{ height: "calc(100vh - 4rem)" }}
-    >
-      <div>
-        <div className="flex flex-col items-center justify-center">
-          <form className="max-w-lg mx-auto pb-2  relative">
+    <BackgroundVideo url={bgVideo}>
+      <div className=" flex justify-center items-center h-full">
+        <div>
+          <form className="max-w-sm mx-auto pb-2  relative mb-10 ">
             <div className="flex">
-              <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
-                Your Email
-              </label>
               <button
                 id="dropdown-button"
                 onClick={toggleDropdown}
-                className="flex-shrink-0 z-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                className="flex-shrink-0 z-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-200  border border-gray-300 rounded-s-lg hover:bg-black focus:ring-4 focus:outline-none focus:ring-gray-100   bg-opacity-60 backdrop-filter backdrop-blur-lg bg-transparent border-gray-600 placeholder-gray-400 text-white focus:border-blue-500 hover:bg-gray-700 focus:ring-blue-500 focus:ring-opacity-50 hover:text-white ring-gray-700 ring-opacity-50 bg-opacity-60 backdrop-filter backdrop-blur-lg bg-transparent"
                 type="button"
               >
                 {rover}
@@ -86,10 +79,10 @@ const Rovers = () => {
                 id="dropdown"
                 className={`z-10 ${
                   dropdownOpen ? "absolute top-11 " : "hidden"
-                } bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+                }  divide-y divide-gray-100 rounded-lg shadow w-44 bg-black`}
               >
                 <ul
-                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                  className="py-2 text-sm  text-gray-200"
                   aria-labelledby="dropdown-button"
                 >
                   <li>
@@ -99,7 +92,7 @@ const Rovers = () => {
                         setDropdownOpen(false);
                       }}
                       type="button"
-                      className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="inline-flex w-full px-4 py-2  hover:bg-gray-600 hover:text-white"
                     >
                       Curiosity
                     </button>
@@ -111,7 +104,7 @@ const Rovers = () => {
                         setDropdownOpen(false);
                       }}
                       type="button"
-                      className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="inline-flex w-full px-4 py-2 hover:bg-gray-100  hover:text-white"
                     >
                       Perseverance
                     </button>
@@ -122,7 +115,7 @@ const Rovers = () => {
                 <input
                   type="search"
                   id="search-dropdown"
-                  className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                  className="block p-2.5 w-full z-20 text-sm rounded-e-lg  border-s-2 border    border-s-gray-700  border-gray-600 placeholder-gray-400 text-white focus:border-blue-500 bg-opacity-60 backdrop-filter backdrop-blur-lg bg-transparent"
                   placeholder="solar day on Mars"
                   required
                   value={sol}
@@ -130,7 +123,7 @@ const Rovers = () => {
                 />
                 <button
                   type="submit"
-                  className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-lg border border-gray-600  focus:ring-4 focus:outline-none  hover:bg-gray-600 focus:ring-gray-600"
                   onClick={(e) => {
                     e.preventDefault();
                     fetchRoverPhotos(currentPage, rover, sol);
@@ -187,11 +180,13 @@ const Rovers = () => {
               </button>
             </div>
           ) : (
-            <NoContentFound />
+            <NoContentFound
+              content={"No photos found for the selected rover and solar day."}
+            />
           )}
         </div>
       </div>
-    </div>
+    </BackgroundVideo>
   );
 };
 
