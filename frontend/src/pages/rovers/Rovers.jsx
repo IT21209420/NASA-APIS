@@ -8,10 +8,18 @@ import Loading from "../../components/Loading.jsx";
 import BackgroundVideo from "../../components/BackgroundVideo.jsx";
 import bgVideo from "../../assets/video-rover.mp4";
 
+/**
+ * Renders the Rovers component.
+ * This component displays a form with a dropdown menu to select a rover, a search input to enter a solar day on Mars, and a grid of rover photos.
+ * It fetches rover photos based on the selected rover and solar day, and paginates the photos.
+ * If no photos are found for the selected rover and solar day, it displays a message indicating no content found.
+ *
+ * @returns {JSX.Element} The Rovers component.
+ */
 const Rovers = () => {
   const [roverPhotos, setRoverPhotos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sol, setSol] = useState(1000);
+  const [sol, setSol] = useState();
   const photosPerPage = 8;
 
   // Get current photos
@@ -22,35 +30,38 @@ const Rovers = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // State for the selected rover
   const [rover, setRover] = useState("Curiosity");
 
+  // State for the dropdown
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // State for loading
   const [isLoading, setIsLoading] = useState(false);
 
+  // Function to toggle the dropdown
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  // Fetch rover photos
   useEffect(() => {
     fetchRoverPhotos();
   }, [rover]);
+
+  // Function to fetch rover photos
   const fetchRoverPhotos = async () => {
     setIsLoading(true);
-    const photos = await NASADataService.getRoverPhotos(
-      currentPage,
-      rover,
-      sol
-    );
+    const photos = await NASADataService.getRoverPhotos(rover, sol || 1000);
     setRoverPhotos(photos);
     setIsLoading(false);
   };
 
   return (
     <BackgroundVideo url={bgVideo}>
-      <div className=" flex justify-center items-center h-full">
+      <div className=" flex flex-col  items-center h-full">
         <div>
-          <form className="max-w-sm mx-auto pb-2  relative mb-10 ">
+          <form className="mx-auto pb-2  relative mb-10 w-96  ">
             <div className="flex">
               <button
                 id="dropdown-button"
@@ -104,7 +115,7 @@ const Rovers = () => {
                         setDropdownOpen(false);
                       }}
                       type="button"
-                      className="inline-flex w-full px-4 py-2 hover:bg-gray-100  hover:text-white"
+                      className="inline-flex w-full px-4 py-2 hover:bg-gray-600  hover:text-white"
                     >
                       Perseverance
                     </button>
@@ -115,8 +126,8 @@ const Rovers = () => {
                 <input
                   type="search"
                   id="search-dropdown"
-                  className="block p-2.5 w-full z-20 text-sm rounded-e-lg  border-s-2 border    border-s-gray-700  border-gray-600 placeholder-gray-400 text-white focus:border-blue-500 bg-opacity-60 backdrop-filter backdrop-blur-lg bg-transparent"
-                  placeholder="solar day on Mars"
+                  className="block p-2.5 w-full z-20 text-sm rounded-lg border-2 border-gray-700 placeholder-gray-400 text-white focus:border-gray-600 bg-opacity-60 backdrop-filter backdrop-blur-lg bg-transparent"
+                  placeholder="solar day on Mars Eg: 1000"
                   required
                   value={sol}
                   onChange={(e) => setSol(e.target.value)}
@@ -126,7 +137,7 @@ const Rovers = () => {
                   className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-lg border border-gray-600  focus:ring-4 focus:outline-none  hover:bg-gray-600 focus:ring-gray-600"
                   onClick={(e) => {
                     e.preventDefault();
-                    fetchRoverPhotos(currentPage, rover, sol);
+                    fetchRoverPhotos(rover, sol);
                   }}
                 >
                   <svg
@@ -152,8 +163,8 @@ const Rovers = () => {
           {isLoading ? (
             <Loading />
           ) : roverPhotos.length > 0 ? (
-            <div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="flex items-center flex-col">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
                 {currentPhotos.map((photo) => (
                   <Card key={photo.id} photo={photo} />
                 ))}
