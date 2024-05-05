@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ImageModal from "./ImageModal";
+import PropTypes from "prop-types";
 
-Modal.setAppElement("#root");
+/**
+ * Card component displays a card with an image, rover name, and earth date.
+ *
+ * @component
+ * @param {Object} photo - The photo object containing image source, camera details, rover name, and earth date.
+ * @returns {JSX.Element} The Card component.
+ */
 
 const Card = ({ photo }) => {
+  useEffect(() => {
+    Modal.setAppElement("#root");
+  }, []);
+
+  // State for the modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  // Function to open the modal
   const openModal = () => {
     setModalIsOpen(true);
   };
 
+  // Function to close the modal
   const closeModal = () => {
     setModalIsOpen(false);
   };
@@ -54,3 +67,7 @@ const Card = ({ photo }) => {
 };
 
 export default Card;
+
+Card.propTypes = {
+  photo: PropTypes.object,
+};
