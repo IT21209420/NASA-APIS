@@ -4,14 +4,30 @@ import bgVideo from "../../assets/video-login.mp4";
 import AuthContext from "../../context/AuthContext";
 import bgExplore from "../../assets/video-explore.mp4";
 
+/**
+ * Login component for user authentication.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Login />
+ * )
+ */
 const Login = () => {
+  // State for the email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // Get the loginUser function from the AuthContext
   const { loginUser } = useContext(AuthContext);
 
+  // State for showing the background video
   const [showBackground, setShowBackground] = useState(true);
+
+  // State for showing the login form
   const [showLogin, setShowLogin] = useState(false);
 
+  // Function to handle the click event
   const handleClick = () => {
     setShowBackground(true);
 
@@ -23,11 +39,10 @@ const Login = () => {
     }, 2000);
   };
 
+  // Function to handle the form submission
   const handleSubmit = (event) => {
     event.preventDefault();
     loginUser({ email, password });
-
-    // Handle form submission here
   };
 
   return (
