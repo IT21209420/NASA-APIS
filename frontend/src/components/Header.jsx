@@ -55,7 +55,7 @@ const Header = () => {
             isOpen ? "" : "hidden"
           } w-full  lg:flex-grow lg:flex lg:items-center lg:w-auto text-white justify-end `}
         >
-          {user ? (
+          {user && (
             <>
               <li
                 className={`nav-item list-none px-6 py-1 hover:bg-white hover:text-black transition duration-300 ease-in-out
@@ -132,33 +132,6 @@ const Header = () => {
                   className="btn border border-white rounded-sm px-4 py-1 hover:bg-white hover:text-black transition duration-300 ease-in-out"
                 >
                   Logout
-                </button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="nav-item list-none">
-                <button
-                  type="button"
-                  className="btn border border-white rounded-sm px-4 py-1 hover:bg-white hover:text-black transition duration-300 ease-in-out"
-                >
-                  onClick=
-                  {() => {
-                    navigate("/login");
-                  }}
-                  Login
-                </button>
-              </li>
-              <li className="nav-item list-none">
-                <button
-                  type="button"
-                  className="btn border border-white rounded-sm px-4 py-1 hover:bg-white hover:text-black transition duration-300 ease-in-out"
-                >
-                  onClick=
-                  {() => {
-                    navigate("/register");
-                  }}
-                  Register
                 </button>
               </li>
             </>
