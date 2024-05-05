@@ -66,6 +66,16 @@ const Register = () => {
                 />
               </div>
             </div>
+            <div className="flex items-center justify-between">
+              <div className="text-sm">
+                <a
+                  href="/login"
+                  className="font-medium text-white hover:text-dominant"
+                >
+                  Already have an account? Login
+                </a>
+              </div>
+            </div>
             <div>
               <button
                 type="submit"
