@@ -1,10 +1,13 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import NASADataService from "../../services/NASADataService";
-
+import ImageModal from "../../components/ImageModal";
+import BackgroundVideo from "../../components/BackgroundVideo";
+import bgVideo from "../../assets/video-POD.mp4";
 const PictureOfTheDay = () => {
-  const [pictureOfTheDay, setPictureOfTheDay] = React.useState({});
+  const [pictureOfTheDay, setPictureOfTheDay] = useState({});
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchPictureOfTheDay = async () => {
       const picture = await NASADataService.getPictureOfTheDay();
       setPictureOfTheDay(picture);
@@ -12,27 +15,40 @@ const PictureOfTheDay = () => {
     fetchPictureOfTheDay();
   }, []);
 
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    <div
-      className="px-4 py-2
-      bg-dominant
-      h-screen"
-    >
-      <div className="bg-white rounded-lg shadow-lg p-6 mt-6 flex flex-col items-center bg-opacity-60">
-        <h1 className="text-2xl font-bold text-black mb-4">
-          Picture of the Day
-        </h1>
-        <img
+    <BackgroundVideo url={bgVideo}>
+      <div className="px-4 py-2">
+        <div className="rounded-lg shadow-lg p-6 mt-6 flex flex-col items-center bg-opacity-60 backdrop-filter backdrop-blur-lg border border-gray-600">
+          <h1 className="text-2xl font-bold text-white mb-4">
+            Picture of the Day
+          </h1>
+          <img
+            src={pictureOfTheDay.url}
+            alt={pictureOfTheDay.title}
+            className="w-64  rounded-lg mb-4"
+            onClick={openModal}
+          />
+          <h2 className="text-xl font-bold text-white mb-2">
+            {pictureOfTheDay.title}
+          </h2>
+          <p className="text-white">{pictureOfTheDay.explanation}</p>
+        </div>
+        <ImageModal
           src={pictureOfTheDay.url}
-          alt={pictureOfTheDay.title}
-          className="w-64  rounded-lg mb-4"
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+          full_name={pictureOfTheDay.title}
         />
-        <h2 className="text-xl font-bold text-black mb-2">
-          {pictureOfTheDay.title}
-        </h2>
-        <p className="text-black">{pictureOfTheDay.explanation}</p>
       </div>
-    </div>
+    </BackgroundVideo>
   );
 };
 
