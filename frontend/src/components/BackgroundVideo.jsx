@@ -1,5 +1,14 @@
 import PropTypes from "prop-types";
 
+/**
+ * A component that displays a background video with optional children elements.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.url - The URL of the video file.
+ * @param {ReactNode} props.children - The optional children elements to be rendered on top of the video.
+ * @returns {JSX.Element} The rendered component.
+ */
 const BackgroundVideo = ({ children, url }) => {
   return (
     <div className="relative h-screen bg-black-100">
