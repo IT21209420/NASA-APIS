@@ -1,3 +1,7 @@
+/**
+ * Represents a loading spinner component.
+ * @returns {JSX.Element} The loading spinner component.
+ */
 const Loading = () => {
   return (
     <div className="flex items-center justify-center h-[70vh]">
