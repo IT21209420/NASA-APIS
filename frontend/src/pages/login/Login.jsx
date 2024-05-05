@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import bgNasa from "../../assets/bg-nasa.png";
-import bgAstro from "../../assets/bg-astronaut.png";
-import bgRocket from "../../assets/bg-rocket.png";
-import bgJupitor from "../../assets/bg-jupitor.png";
-import BackgroundVideo from "../../components/BackgroundVideo";
 import bgVideo from "../../assets/video-login.mp4";
+import AuthContext from "../../context/AuthContext";
+import bgExplore from "../../assets/video-explore.mp4";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loginUser } = useContext(AuthContext);
 
   const [showBackground, setShowBackground] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
@@ -21,19 +19,21 @@ const Login = () => {
       setShowBackground(false);
       setTimeout(() => {
         setShowLogin(true);
-      }, 1000);
-    }, 1000);
+      }, 2000);
+    }, 2000);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    loginUser({ email, password });
+
     // Handle form submission here
   };
 
   return (
     <div
       className={`min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 
-    ${showBackground ? "overflow-hidden" : "overflow-auto"}`}
+    `}
     >
       {!showBackground && (
         <div>
@@ -111,7 +111,7 @@ const Login = () => {
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-medium text-indigo-500 hover:text-indigo-400"
+                    className="font-medium text-indigo-100 hover:text-indigo-400"
                   >
                     Forgot your password?
                   </a>
@@ -138,65 +138,27 @@ const Login = () => {
           </div>
         </div>
       )}
-
       {!showLogin && (
         <div>
-          <img
-            src={bgJupitor}
-            alt="Jupitor"
-            className={`fixed bottom-30 left-40 object-cover transition-transform duration-1000 transform ${
-              showBackground
-                ? "translate-x-40 -translate-y-0"
-                : "-translate-x-full translate-y-full"
+          <video
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000  ${
+              showBackground ? "opacity-100 " : "opacity-0 bg-none"
             }`}
-            style={{ zIndex: 40, height: 200 }}
-          />
-          <img
-            src={bgRocket}
-            alt="Rocket"
-            className={`fixed right-60 top-0 object-cover transition-transform duration-1000 transform opacity-90 ${
-              showBackground
-                ? "translate-x-0 translate-y-0"
-                : "translate-x-full -translate-y-full"
+            autoPlay
+            loop
+            muted
+          >
+            <source src={bgExplore} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <button
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity backdrop-filter backdrop-blur border  border-white text-white  p-5 rounded-lg transition-opacity duration-1000 ${
+              showBackground ? "opacity-100" : "opacity-0 "
             }`}
-            style={{ zIndex: 50, height: 200 }}
-          />
-
-          <img
-            src={bgAstro}
-            alt="Astronaut"
-            className={`fixed right-0 bottom-20 object-cover transition-transform duration-1000 transform ${
-              showBackground ? "-translate-x-20" : "translate-x-full"
-            }`}
-            style={{ zIndex: 30, height: 200 }}
-          />
-
-          <img
-            src={bgNasa}
-            alt="NASA"
-            className={`fixed top-0 left-20  object-cover transition-transform duration-1000 transform ${
-              showBackground
-                ? "translate-x-0 translate-y-0"
-                : "-translate-x-full -translate-y-full"
-            }`}
-            style={{ zIndex: 20, height: 250 }}
-          />
-
-          <Link
             onClick={handleClick}
-            className={`absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 border rounded-md p-4 text-center bg-blue-500 text-white hover:bg-blue-600 transition-transform duration-200 ${
-              showBackground ? "opacity-100" : "opacity-0 d-none"
-            }`}
-            style={{ zIndex: 20 }}
           >
             Explore
-          </Link>
-          <div
-            className={`fixed top-0 left-0 w-full h-full bg-custom-bg bg-cover transition-opacity duration-1000 ${
-              showBackground ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ zIndex: 10 }}
-          />
+          </button>
         </div>
       )}
     </div>
