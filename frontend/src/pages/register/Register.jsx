@@ -3,11 +3,19 @@ import BackgroundVideo from "../../components/BackgroundVideo";
 import bgVideo from "../../assets/video-login.mp4";
 import AuthContext from "../../context/AuthContext";
 
+/**
+ * Register component for signing up for an account.
+ * @returns {JSX.Element} The Register component.
+ */
 const Register = () => {
+  // State for the email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // Get the registerUser function from the AuthContext
   const { registerUser } = useContext(AuthContext);
 
+  // Function to handle the form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     registerUser({ email, password });
