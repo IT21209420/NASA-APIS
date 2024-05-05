@@ -18,7 +18,7 @@ const Card = ({ photo }) => {
   return (
     <div
       className=" rounded-md p-2 h-48 w-64 shadow-lg 
-    bg-white bg-opacity-50 hover:bg-opacity-70 transition duration-300 ease-in-out
+    bg-opacity-60 backdrop-filter backdrop-blur-lg border border-gray-600
     "
     >
       <img
@@ -30,23 +30,24 @@ const Card = ({ photo }) => {
       <div className="mt-2">
         <h2
           className="text-sm font-semibold
-        text-black
+        text-white
         "
         >
           {photo.rover.name}
         </h2>
         <p
           className="text-xs
-        text-black
+        text-white
         "
         >
           {photo.earth_date}
         </p>
       </div>
       <ImageModal
-        photo={photo}
+        src={photo.img_src}
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
+        full_name={photo.camera.full_name}
       />
     </div>
   );
