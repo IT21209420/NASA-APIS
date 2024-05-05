@@ -12,7 +12,13 @@ import PictureOfTheDay from "./pages/pictureOfTheDay/PictureOfTheDay";
 import EarthImaginery from "./pages/earthImaginery/EarthImaginery";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import About from "./pages/about/About";
 
+/**
+ * The main component of the application.
+ *
+ * @returns {JSX.Element} The rendered App component.
+ */
 function App() {
   return (
     <Router>
@@ -26,6 +32,8 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<Home />} />
             </Routes>
           </Layout>
         </AuthContextProvider>
