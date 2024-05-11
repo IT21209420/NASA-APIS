@@ -68,6 +68,8 @@ const Login = () => {
             autoPlay
             loop
             muted
+            playsInline
+            webkit-playsinline
             poster={poster}
           >
             <source src={bgVideo} type="video/mp4" />
