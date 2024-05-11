@@ -2,6 +2,9 @@ import PropTypes from "prop-types"; // Import PropTypes
 import { useLocation } from "react-router-dom";
 
 import Header from "./Header";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+import Loading from "./Loading";
 
 /**
  * Renders the layout component.
@@ -11,15 +14,35 @@ import Header from "./Header";
  * @param {ReactNode} props.children - The child components to be rendered within the layout.
  * @returns {JSX.Element} The rendered layout component.
  */
+
 const Layout = ({ children }) => {
+  const { userLoading } = useContext(AuthContext);
+
   const location = useLocation();
   return (
-    <div className="font-mono h-screen  ">
-      {location.pathname !== "/login" && location.pathname !== "/register" && (
-        <Header />
+    <div>
+      {userLoading &&
+      location.pathname !== "/login" &&
+      location.pathname !== "/register" ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            fontSize: "24px",
+            color: "white",
+          }}
+        >
+          <Loading />
+        </div>
+      ) : (
+        <div className="font-mono h-screen  ">
+          {location.pathname !== "/login" &&
+            location.pathname !== "/register" && <Header />}
+          <div>{children}</div>
+        </div>
       )}
-
-      <div>{children}</div>
     </div>
   );
 };

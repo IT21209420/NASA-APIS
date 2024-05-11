@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import BackgroundVideo from "../../components/BackgroundVideo";
 import bgVideo from "../../assets/video-login.mp4";
 import AuthContext from "../../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 /**
  * Register component for signing up for an account.
@@ -11,9 +13,15 @@ const Register = () => {
   // State for the email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Get the registerUser function from the AuthContext
   const { registerUser } = useContext(AuthContext);
+
+  // Function to handle the click event
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   // Function to handle the form submission
   const handleSubmit = (e) => {
@@ -49,21 +57,25 @@ const Register = () => {
                   value={email}
                 />
               </div>
-              <div className="mt-5">
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
+              <div className="relative">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"} // Change type based on state
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-dominant focus:border-dominant focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 mt-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
                   value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye}
+                    onClick={handleShowPassword}
+                    className="h-6 w-6 text-indigo-500 cursor-pointer"
+                  />
+                </div>
               </div>
             </div>
             <div className="flex items-center justify-between">

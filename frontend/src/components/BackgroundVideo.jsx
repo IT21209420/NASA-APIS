@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 
+import poster from "../assets/black_image.jpg";
 /**
  * A component that displays a background video with optional children elements.
  *
@@ -17,7 +18,9 @@ const BackgroundVideo = ({ children, url }) => {
         autoPlay
         loop
         muted
-        playsinline 
+        playsInline
+        webkit-playsinline
+        poster={poster}
       >
         <source src={url} type="video/mp4" />
         {/* Add additional source elements for different video formats */}

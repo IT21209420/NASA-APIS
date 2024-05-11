@@ -10,6 +10,7 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const [userLoading, setUserLoading] = useState(true);
 
   useEffect(() => {
     checkUserLoggedIn();
@@ -17,6 +18,7 @@ export const AuthContextProvider = ({ children }) => {
 
   // check user is logged in
   const checkUserLoggedIn = async () => {
+    setUserLoading(true);
     try {
       const res = await fetch(`https://nasa-apis-v1uf.onrender.com/api/me`, {
         method: "GET",
@@ -40,6 +42,7 @@ export const AuthContextProvider = ({ children }) => {
       } else {
         navigate("/login", { replace: true });
       }
+      setUserLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -71,13 +74,16 @@ export const AuthContextProvider = ({ children }) => {
   //register request
   const registerUser = async (userData) => {
     try {
-      const res = await fetch(`https://nasa-apis-v1uf.onrender.com/api/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...userData }),
-      });
+      const res = await fetch(
+        `https://nasa-apis-v1uf.onrender.com/api/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...userData }),
+        }
+      );
       const result = await res.json();
       if (!result.error) {
         toast.success("User Registered Successfully! Login to continue ");
@@ -91,7 +97,9 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loginUser, registerUser, user, setUser }}>
+    <AuthContext.Provider
+      value={{ loginUser, registerUser, user, setUser, userLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import bgVideo from "../../assets/video-login.mp4";
 import AuthContext from "../../context/AuthContext";
 import bgExplore from "../../assets/video-explore.mp4";
-
+import poster from "../../assets/black_image.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 /**
  * Login component for user authentication.
  *
@@ -27,8 +29,13 @@ const Login = () => {
   // State for showing the login form
   const [showLogin, setShowLogin] = useState(false);
 
+  const [disableExplore, setDisableExplore] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
+
   // Function to handle the click event
   const handleClick = () => {
+    setDisableExplore(true);
     setShowBackground(true);
 
     setTimeout(() => {
@@ -37,6 +44,10 @@ const Login = () => {
         setShowLogin(true);
       }, 2000);
     }, 2000);
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   // Function to handle the form submission
@@ -57,6 +68,7 @@ const Login = () => {
             autoPlay
             loop
             muted
+            poster={poster}
           >
             <source src={bgVideo} type="video/mp4" />
             {/* Add additional source elements for different video formats */}
@@ -89,14 +101,11 @@ const Login = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div>
-                  <label htmlFor="password" className="sr-only">
-                    Password
-                  </label>
+                <div className="relative">
                   <input
                     id="password"
                     name="password"
-                    type="password"
+                    type={showPassword ? "text" : "password"} // Change type based on state
                     autoComplete="current-password"
                     required
                     className="appearance-none rounded-none relative block w-full px-3 py-2 mt-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -104,6 +113,13 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <FontAwesomeIcon
+                      icon={showPassword ? faEyeSlash : faEye}
+                      onClick={handleShowPassword}
+                      className="h-6 w-6 text-indigo-500 cursor-pointer"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -162,18 +178,24 @@ const Login = () => {
             autoPlay
             loop
             muted
+            playsInline
+            webkit-playsinline
+            poster={poster}
           >
             <source src={bgExplore} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <button
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity backdrop-filter backdrop-blur border  border-white text-white  p-5 rounded-lg transition-opacity duration-1000 ${
-              showBackground ? "opacity-100" : "opacity-0 "
-            }`}
-            onClick={handleClick}
-          >
-            Explore
-          </button>
+          {!disableExplore && (
+            <button
+              className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity backdrop-filter backdrop-blur border  border-white text-white  p-5 rounded-lg transition-opacity duration-1000 ${
+                showBackground ? "opacity-100" : "opacity-0 "
+              }`}
+              onClick={handleClick}
+              disabled={disableExplore}
+            >
+              Explore
+            </button>
+          )}
         </div>
       )}
     </div>
