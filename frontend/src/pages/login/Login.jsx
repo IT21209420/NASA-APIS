@@ -63,8 +63,8 @@ const Login = () => {
             Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-black opacity-50"></div>
-          {/* bg-opacity-60 backdrop-filter backdrop-blur-lg */}
-          <div className="max-w-md w-full space-y-8 border p-10  rounded-lg shadow-lg bg-red-500">
+
+          <div className="max-w-md w-full space-y-8 border p-10  rounded-lg shadow-lg bg-opacity-60 backdrop-filter backdrop-blur-lg">
             <div>
               <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
                 Sign in to your account
