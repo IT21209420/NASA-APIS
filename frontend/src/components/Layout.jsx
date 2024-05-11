@@ -30,8 +30,6 @@ const Layout = ({ children }) => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            fontSize: "24px",
-            color: "white",
           }}
         >
           <Loading />
